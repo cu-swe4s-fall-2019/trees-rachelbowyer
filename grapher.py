@@ -66,9 +66,9 @@ if __name__ == '__main__':
     """
     ########## benchmarking ##########
     """
-    norm_time = np.zeros((3,len(range(0, N))))
-    non_time = np.zeros((3,len(range(0, N))))
-    insert_time = np.zeros((3,len(range(0, N))))
+    norm_time = np.zeros((3, len(range(0, N))))
+    non_time = np.zeros((3, len(range(0, N))))
+    insert_time = np.zeros((3, len(range(0, N))))
 
     for i in range(0, N):
         # searching benchmarking
@@ -99,22 +99,22 @@ if __name__ == '__main__':
         for j in range(0, i):
             Table.search(non_key)
         t7 = time.time()
-        
-        norm_time[0,i] = t2 - t1
-        norm_time[1,i] = t4 - t3
-        norm_time[2,i] = t6 - t5
-        
-        non_time[0,i] = t3 - t2
-        non_time[1,i] = t5 - t4
-        non_time[2,i] = t7 - t6
-        
+
+        norm_time[0, i] = t2 - t1
+        norm_time[1, i] = t4 - t3
+        norm_time[2, i] = t6 - t5
+
+        non_time[0, i] = t3 - t2
+        non_time[1, i] = t5 - t4
+        non_time[2, i] = t7 - t6
+
         # inserting benchmarking
-        sub_result = result[0:i] #subsampling results
+        sub_result = result[0:i]  # subsampling results
 
         sub_BT_tree = None
         sub_AVL_tree = avl.AVL()
         sub_Table = ht.ChainedHash(i+1, hf.h_rolling)
-        
+
         t00 = time.time()
         for num in sub_result:
             sub_BT_tree = bt.add(BT_tree, num[0], value=num[1])
@@ -125,16 +125,15 @@ if __name__ == '__main__':
         for num in sub_result:
             sub_Table.add(num[0], num[1])
         t33 = time.time()
-        
-        insert_time[0,i] = t11 - t00
-        insert_time[1,i] = t22 - t11
-        insert_time[2,i] = t33 - t22
-        
-        
+
+        insert_time[0, i] = t11 - t00
+        insert_time[1, i] = t22 - t11
+        insert_time[2, i] = t33 - t22
+
 fig = plt.figure()
-plt.plot(range(0,N),norm_time[0],label="Binary Tree")
-plt.plot(range(0,N),norm_time[1],label="AVL Tree")
-plt.plot(range(0,N),norm_time[2],label="Hash Table")
+plt.plot(range(0, N), norm_time[0], label="Binary Tree")
+plt.plot(range(0, N), norm_time[1], label="AVL Tree")
+plt.plot(range(0, N), norm_time[2], label="Hash Table")
 plt.title("Time Taken Searching For Keys")
 plt.xlabel('Number of Keys Searched For')
 plt.ylabel('Time in seconds')
@@ -143,9 +142,9 @@ plt.legend()
 plt.savefig('Search.jpg', bbox_inches="tight")
 
 fig = plt.figure()
-plt.plot(range(0,N),non_time[0],label="Binary Tree")
-plt.plot(range(0,N),non_time[1],label="AVL Tree")
-plt.plot(range(0,N),non_time[2],label="Hash Table")
+plt.plot(range(0, N), non_time[0], label="Binary Tree")
+plt.plot(range(0, N), non_time[1], label="AVL Tree")
+plt.plot(range(0, N), non_time[2], label="Hash Table")
 plt.title("Time Taken Searching for Keys NOT There")
 plt.xlabel('Number of Keys Search')
 plt.ylabel('Time in seconds')
@@ -154,9 +153,9 @@ plt.legend()
 plt.savefig('Search_Not_There.jpg', bbox_inches="tight")
 
 fig = plt.figure()
-plt.plot(range(0,N),insert_time[0],label="Binary Tree")
-plt.plot(range(0,N),insert_time[1],label="AVL Tree")
-plt.plot(range(0,N),insert_time[2],label="Hash Table")
+plt.plot(range(0, N), insert_time[0], label="Binary Tree")
+plt.plot(range(0, N), insert_time[1], label="AVL Tree")
+plt.plot(range(0, N), insert_time[2], label="Hash Table")
 plt.title("Keys Inserted vs Time")
 plt.xlabel('Number of Keys Inserted')
 plt.ylabel('Time in seconds')

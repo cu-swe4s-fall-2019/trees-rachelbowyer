@@ -15,7 +15,7 @@ if __name__ == '__main__':
     parser.add_argument('file', type=str, help='specify file name')
     parser.add_argument('struc', type=str, help='specify data structure type')
     parser.add_argument('N', type=int, help='how many key/val pairs to use')
-    
+
     args = parser.parse_args()
 
     file = args.file
@@ -27,9 +27,9 @@ if __name__ == '__main__':
     for x in lines:
         result.append(x.rstrip().split('\t'))
     f.close()
-    
+
     if args.N <= 10000:
-        result = result[0:args.N] #subsampling results
+        result = result[0:args.N]  # subsampling results
     else:
         raise ValueError
 
