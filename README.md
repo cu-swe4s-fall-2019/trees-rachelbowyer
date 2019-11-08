@@ -14,10 +14,18 @@ I used the python time module to do the benchmarking and decided to make graphs 
 ![](Search_rand.jpg)
 ![](Search_Not_There_rand.jpg)
 
+(1) It appears that the Binary Tree takes the longest time to insert keys that are in the tree by far.  In fact the time it takes for the binary tree appears to increase faster than linearly for the number of keys inserted.  The AVL tree does the second best job and the Hash table does the best job.  The time it takes to insert pairs increases across all methods for an increased number of keys.
+(2) It appears that the Binary Tree takes the longest time to search for keys that are in the tree by far.  The Hash table appears to perform second best with the AVL tree being the fastest.  The time it takes to search increases across all methods for an increased number of keys.
+(3) It appears that the Binary Tree takes the longest time to search for keys that are NOT in the tree by far.  The Binary Tree time cost is orders of magnitude above the other methods.  The time it takes to search increases across all methods for an increased number of keys.
+
 ### Sorted Keys
 ![](Insert_Time_sorted.jpg)
 ![](Search_sorted.jpg)
 ![](Search_Not_There_sorted.jpg)
+
+(1) This first result is very similar to the random keys result.  It appears that the Binary Tree takes the longest time to insert keys that are in the tree by far.  In fact the time it takes for the binary tree appears to increase faster than linearly for the number of keys inserted.  The AVL tree does the second best job and the Hash table does the best job.  The time it takes to insert pairs increases across all methods for an increased number of keys.
+(2) This second is fairly different than the random keys.  The difference between the searching for keys is much smaller than it was above.  The Binary Tree still appears to be the worst, but not by as much.  The second best is the Hash Table and then the AVL tree is the fastest.  The time it takes to search increases across all methods for an increased number of keys.
+(3) This result is similar to the describtion of (2) above. The difference between the searching for keys NOT in the data is much smaller than it was for the random keys.  The Binary Tree still appears to be the worst, but not by as much. The Hast Table does the second best job and the AVL Tree does the best job.  The time it takes to search for keys increases across all methods for an increased number of keys.
 
 ## Git Submodules
 This code relies on the avl_tree and hash-tables-rachelbowyer submodules.
