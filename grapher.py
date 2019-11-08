@@ -139,7 +139,7 @@ plt.xlabel('Number of Keys Searched For')
 plt.ylabel('Time in seconds')
 plt.legend()
 
-plt.savefig('Search.jpg', bbox_inches="tight")
+plt.savefig('Search_' + file[:-4] + '.jpg', bbox_inches="tight")
 
 fig = plt.figure()
 plt.plot(range(0, N), non_time[0], label="Binary Tree")
@@ -150,7 +150,7 @@ plt.xlabel('Number of Keys Search')
 plt.ylabel('Time in seconds')
 plt.legend()
 
-plt.savefig('Search_Not_There.jpg', bbox_inches="tight")
+plt.savefig('Search_Not_There_' + file[:-4] + '.jpg', bbox_inches="tight")
 
 fig = plt.figure()
 plt.plot(range(0, N), insert_time[0], label="Binary Tree")
@@ -161,4 +161,4 @@ plt.xlabel('Number of Keys Inserted')
 plt.ylabel('Time in seconds')
 plt.legend()
 
-plt.savefig('Insert_Time.jpg', bbox_inches="tight")
+plt.savefig('Insert_Time_' + file[:-4] + '.jpg', bbox_inches="tight")
