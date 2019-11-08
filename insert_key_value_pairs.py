@@ -13,7 +13,9 @@ import hash_functions as hf
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Specify parameters")
     parser.add_argument('file', type=str, help='specify file name')
-    parser.add_argument('structure', type=str, help='specify data structure type')
+    parser.add_argument('struc', type=str, help='specify data structure type')
+    parser.add_argument('N', type=int, help='how many key/val pairs to use')
+    
     args = parser.parse_args()
 
     file = args.file
@@ -26,7 +28,15 @@ if __name__ == '__main__':
         result.append(x.rstrip().split('\t'))
     f.close()
     
-    if args.structure == 'tree':
+    if args.N <= 10000:
+        result = result[0:args.N] #subsampling results
+    else:
+        raise ValueError
+
+    """
+    ########## binary tree ##########
+    """
+    if args.struc == 'tree':
         # initializing binary tree
         Tree = None
 
@@ -44,37 +54,44 @@ if __name__ == '__main__':
 
         print('Insertion time ' + str(t1-t0))
         print('Search time ' + str(t2-t1))
-    
-    elif args.structure == 'AVL':
+
+    """
+    ########## AVL tree ##########
+    """
+    if args.struc == 'AVL':
         # initializing avl tree
         tree = avl.AVL()
         # print(tree)
-        
+
         t3 = time.time()
         for num in result:
             tree.insert(num[1])
-            #print()
-            #print(tree)
-            
+            # print()
+            # print(tree)
+
         t4 = time.time()
         print("Insert time " + str(t4-t3))
-        
+
         t5 = time.time()
         for i in range(0, 100):
             choice = random.choice(result)  # choosing rand from file
             g = tree.find(choice[1])
-            
+
         t6 = time.time()
-        
+
         print("Search time " + str(t6-t5))
 
-    elif args.structure == 'hash':
-        Table = ht.ChainedHash(10000,hf.h_rolling)
+    """
+    ########## hash table ##########
+    """
+    if args.struc == 'hash':
+
+        Table = ht.ChainedHash(10000, hf.h_rolling)
 
         t7 = time.time()
 
         for num in result:
-            Table.add(num[0],num[1])
+            Table.add(num[0], num[1])
 
         t8 = time.time()
 
@@ -92,10 +109,3 @@ if __name__ == '__main__':
 
     else:
         raise ValueError
-
-#     t3 = time.time()    
-#     for item in items:
-#         g = tree.find(item)
-#         print(g)
-#     t4 = time.time()
-#     print('Search Time' + str(t1-t0))
